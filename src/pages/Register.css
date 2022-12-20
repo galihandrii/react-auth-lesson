@@ -1,0 +1,31 @@
+.regis{
+    background-color: blanchedalmond;
+    text-align: center;
+    width: 400px;
+    height: 420px;
+    box-shadow: 2px 2px 4px 2px;
+    border-radius: 10px;
+    margin: auto;
+    margin-top: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+input{
+    border-radius: 6px;
+    width: 300px;
+    height: 30px;
+}
+button{
+    width: 300px;
+    height: 38px;
+    background-color: blue ;
+    color: white;
+    border-radius: 6px;
+}
+button:hover{
+    width: 320px;
+    height: 40px;
+    box-shadow: 2px 2px 4px 2px grey;
+}

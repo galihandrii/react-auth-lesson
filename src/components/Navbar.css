@@ -1,0 +1,14 @@
+.navbar{
+    display: flex;
+}
+ul{
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+li a{
+    text-decoration: none;
+}
+li a:hover{
+    color: crimson;
+}
