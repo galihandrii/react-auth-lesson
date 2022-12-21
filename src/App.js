@@ -6,6 +6,7 @@ import Homepage from './pages/Homepages';
 import Register from './pages/Register';
 import ProtectedRoute from './hoc/ProtectedRoute';
 import Discovery from './pages/Discoverypage';
+import AddNewCar from './pages/AddNewCar';
 import ProtectedRoute2 from './hoc/ProtectedRoute2';
 
 
@@ -16,15 +17,15 @@ function App() {
       <Route path="/" element={<Homepage/>}/>
       <Route path='/Login' element={<Login/>}/>
       <Route path='/Register' element={<Register/>}/>
-      {/*<Route element={<ProtectedRoute/>}>
+      <Route element={<ProtectedRoute/>}>
         <Route path='/Discovery' element={<Discovery/>}/>
+        <Route path='/add-car' element={<AddNewCar/>}/>
+  </Route>
 
-  </Route>*/}
-
-      <Route 
+      {/*<Route 
         path='/Discovery' 
         element={<ProtectedRoute2><Discovery/></ProtectedRoute2>}>
-      </Route>
+</Route>*/}
 
 
     </Routes>
