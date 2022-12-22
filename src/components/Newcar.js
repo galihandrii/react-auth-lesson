@@ -1,12 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import "./Newcar.css"
 import { useState } from "react";
+import axios from "axios";
+import { API } from "../pages/const/endpoint";
 
 const Newcar = () => {
 const [name,setName] = useState('');
 const [img,setImg] = useState(null);
 const [price,setPrice] = useState('');
 const [category,setCategory] = useState('');
+const navigate = useNavigate();
+
 
 const handleName = (e) => {
     setName(e.target.value);
@@ -21,8 +25,33 @@ const handleCategory = (e) => {
     setCategory(e.target.value);
 }
 
-console.log(name,img,price,category);
+const handleCreate = () => {
+    const token = localStorage.getItem("token");
 
+    const config = {
+        headers: {
+            access_token:token,
+        },
+    };
+
+
+
+    const formData = new FormData();
+    formData.append("image", img);
+    formData.append("name",name);
+    formData.append("category",category);
+    formData.append("price",price);
+    formData.append("status",false);
+    
+    axios.post(API.POST_CAR, formData, config)
+    .then((res)=>{
+        navigate("/Discovery");
+    })
+    .catch((err)=>console.log(err));
+    
+
+
+}
 
 
     return (
@@ -31,8 +60,8 @@ console.log(name,img,price,category);
             <div><input onChange={handlePrice} placeholder="Harga"/></div>
             <div><input onChange={handleImg} type="file"/></div>
             <div><input onChange={handleCategory} placeholder="kategori"/></div>
-            <div><button><Link to="/Discovery">Cancel</Link></button></div>
-            <div><button>Save</button></div>
+            <div><Link to="/Discovery"><button>Cancel</button></Link></div>
+            <div><button onClick={handleCreate}>Save</button></div>
         </div>
     )
 }
