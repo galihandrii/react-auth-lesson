@@ -61,7 +61,7 @@ const Discovery = () => {
                                 </div>
                                 <div className="thebuttons">
                                 <div className="delete-button"><button onClick={()=>handleDelete(item.id)}>Delete</button></div>
-                                <div className="edit-button"><Link to="/Editcar"><button>Edit</button></Link></div>
+                                <div className="edit-button"><Link to={`/Editcar/${item.id}`}><button>Edit</button></Link></div>
                                 </div>
                                 
                             </div>
