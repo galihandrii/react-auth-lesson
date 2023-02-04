@@ -11,31 +11,42 @@ const Discovery = () => {
         getData();
     },[])
 
-    const getData = () => {
+    const getData = async() => {
         const token = localStorage.getItem('token')
         const config = {
             headers: { access_token: token  }
         };
-        axios.get("https://bootcamp-rent-cars.herokuapp.com/admin/v2/car", config)
-        .then((res)=>{
-           setCars(res.data.cars);
-        })
-        .catch((err)=>console.log(err.message))
+
+        try {
+            const res = await axios.get("https://bootcamp-rent-cars.herokuapp.com/admin/v2/car", config);
+            setCars(res.data.cars)
+        } catch (error) {
+            console.log(error)
+        }
+        //axios.get("https://bootcamp-rent-cars.herokuapp.com/admin/v2/car", config)
+        //.then((res)=>{
+        //   setCars(res.data.cars);
+       // })
+       // .catch((err)=>console.log(err.message))
     }
 
-    const handleDelete = (id) => {
+    const handleDelete = async(id) => {
         const token = localStorage.getItem('token')
         const config = {
             headers: { access_token: token  }
         };
 
-
-
-        axios.delete(`https://bootcamp-rent-cars.herokuapp.com/admin/car/${id}`,config)
-        .then(res=>{
+        try {
+            const res = await axios.delete(`https://bootcamp-rent-cars.herokuapp.com/admin/car/${id}`,config);
             getData()
-        })
-        .catch((err)=>console.log(err.message));
+        } catch (error) {
+            console.log(error.response);
+        }
+
+        //axios.delete(`https://bootcamp-rent-cars.herokuapp.com/admin/car/${id}`,config)
+        //.then(res=>{
+         //   getData()
+//        .catch((err)=>console.log(err.message));
     
     
     }
