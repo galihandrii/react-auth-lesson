@@ -38,6 +38,8 @@ const Discovery = () => {
 
         try {
             const res = await axios.delete(`https://bootcamp-rent-cars.herokuapp.com/admin/car/${id}`,config);
+            console.log(res);
+            alert('delete berhasil!')
             getData()
         } catch (error) {
             console.log(error.response);
