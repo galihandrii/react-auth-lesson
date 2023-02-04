@@ -9,6 +9,7 @@ const Login = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("");
     const [isLogin, setIsLogin] = useState(false);
+    const [error, setError] = useState('');
     const navigate = useNavigate();
     
     const handleEmail = (e) => {
@@ -18,21 +19,42 @@ const Login = () => {
         setPassword(e.target.value);
     };
     
-    const handleLogin = () => {
-        const payloadLogin = {
-            email: email,
-            password: password,
-           
-        };
+    const handleLogin = async() => {
+        if (!email.length && !password.length){
+            setError('Maskan email dan Password')
+        }
+        else if (!email.length ){
+            setError('Masukan email')
+        }
+         else if (!password.length){
+            setError('Masukan Password')
+        }
+        else {
+            const payloadLogin = {
+                email: email,
+                password: password,
+               
+            };
+        
+        try {
+            const res = await axios.post(API.LOGIN,payloadLogin);
+            localStorage.setItem('token', res.data.access_token);
+            navigate("/Discovery");
+        } catch (error) {
+            console.log(error.response.data.message);
+            setError(error.response.data.message)
+        }
+        }
+        
+
+   // axios.post(API.LOGIN,payloadLogin)
+    //.then((res)=> {
+    //    console.log(res)
+   // localStorage.setItem('token', res.data.access_token);
+    //navigate("/Discovery");
     
-    axios.post(API.LOGIN,payloadLogin)
-    .then((res)=> {
-        console.log(res)
-    localStorage.setItem('token', res.data.access_token);
-    navigate("/Discovery");
-    
-    })
-    .catch((err)=> console.log(err.message))
+   // })
+   // .catch((err)=> console.log(err.message))
     }
     
     useEffect(()=>{
@@ -54,6 +76,9 @@ const Login = () => {
     return(
         <div>
             <Navbar/>
+            {
+                !!error.length && <h2>{error}</h2>
+            }
             {
                 isLogin ? (<button onClick={handleLogout}>Log Out</button>) : (<div className='login'>
                 <div><h2>Login admin</h2></div>
